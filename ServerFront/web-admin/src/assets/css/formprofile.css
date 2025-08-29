@@ -1,0 +1,295 @@
+  .grid-profile{
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 56px;
+    margin-top: 32px;
+    display: grid;
+  }
+ .right-preview{
+    position: relative;
+    width: 100%;
+    margin-bottom: 50px;
+    text-align: center;
+
+ }
+  .image-upload-container {
+    position: relative;
+    width: 100%;
+}
+
+.img-grande {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.img-container {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+   /* overflow: hidden;*/
+    width: 100px;
+    height: 100px;
+    border: 4px solid #fff;
+  
+}
+.upload-icon-center {
+   position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.upload-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.img-centralizada {
+   width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  /*  position: absolute;*/
+}
+
+
+
+/* Endereço */
+.Addresscontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+   
+  }
+  
+  .Addresscontainer .form-container {
+    width: 35%;
+    padding: 20px;
+  }
+  
+  .Addresscontainer .map-container {
+    width: 100%;
+    height: 1000px;
+  }
+  
+  .Addresscontainer .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .Addresscontainer label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .Addresscontainer input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .Addresscontainer  .confirm-button {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .Addresscontainer .alterar-link {
+    margin-left: 10px;
+    color: red;
+    cursor: pointer;
+  }
+
+  .viewAdrress{
+    font-size: 16px;
+    line-height: 24px;
+    margin-left: 32px;
+  }
+
+  .map-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f8f8f8;
+
+}
+
+.address-info {
+  padding: 10px 15px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.address-info h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.address-info p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.edit-button {
+  margin-top: 10px;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.edit-button:hover {
+  background-color: #005ea2;
+}
+
+/**/
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.map-base {
+  height: 100%;
+  width: 100%;
+}
+
+.address-info {
+  position: absolute;
+  top: 90px;
+  left: 30px;
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  max-width: 300px;
+  z-index: 400;
+}
+
+.address-info h3 {
+  margin-top: 0;
+  color: #444;
+}
+
+.address-info p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+/*
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}*/
+/*
+Addresscontainer .map-container {
+    width: 100%;
+    height: 500px;
+}*/
+
+.Addresscontainer:has(.left):not(:has(.right)) .left,
+.Addresscontainer:has(.right):not(:has(.left)) .right {
+  height: 100%;
+}
+
+.container {
+  max-width: 400px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.barra-etapas {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.barra {
+  flex: 1;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+.barra.ativa {
+  background-color: #d40000;
+}
+
+.botao {
+  padding: 8px 12px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.botao-cancelar {
+  color: #d40000;
+}
+
+/*aa*/
+.profile-address-edit__step-title {
+  margin-top: 8px;
+  padding-right: 40px;
+}
+h3 {
+  font-family: Sul Sans,Open Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.33;
+}
+
+.profile-address-edit-form__label, .profile-address-edit-form .field__label {
+  color: #404040;
+  width: 100%;
+  text-transform: initial;
+  margin-bottom: 4px;
+  font-size: 15px;
+  font-weight: 700;
+  display: block;
+}
+.profile-address-edit__confirm-address {
+  background: #f2f2f2;
+  border-radius: 8px;
+  padding: 16px;
+  line-height: 26px;
+}
+.profile-address-edit__confirm-address {
+  line-height: 26px;
+}
+.mapcont {
+position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+
+.map-overlay-blocker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000; 
+  background-color: rgba(255, 255, 255, 0); /* transparente */
+  pointer-events: all; /* impede interações */
+}

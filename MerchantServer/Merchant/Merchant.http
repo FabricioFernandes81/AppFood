@@ -1,0 +1,6 @@
+@Merchant_HostAddress = http://localhost:5022
+
+GET {{Merchant_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

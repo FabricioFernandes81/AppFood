@@ -1,0 +1,180 @@
+
+
+.gxujlE{
+    margin-bottom: 24px;
+
+}
+
+.fVDuuu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 8px;
+}
+
+.fVDuuu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 8px;
+}
+
+.fUWXSc {
+    position: relative;
+    cursor: pointer;
+    transition: background-color 250ms ease-in-out, box-shadow 100ms ease-in-out;
+    border-radius: 8px;
+    border: 0px;
+    font-size: 16px;
+    line-height: 24px;
+    display: inline-flex
+;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 2px;
+    background-color: transparent;
+    font-family: "iFood RC Textos", Helvetica, Arial, sans-serif;
+    text-decoration: underline;
+    font-weight: 400;
+    color: rgb(235, 0, 51);
+}
+
+.eyVOuM {
+    display: inline-flex;
+    font-size: 0px;
+}
+
+.ePciIf {
+    font-family: "iFood RC Textos", Helvetica, Arial, sans-serif;
+    color: rgb(21, 21, 21);
+    font-size: 32px;
+    line-height: 48px;
+    margin-bottom: 16px;
+}
+
+.dgVITK {
+    font-family: "iFood RC Textos", Helvetica, Arial, sans-serif;
+    color: rgb(21, 21, 21);
+    font-size: 18px;
+    line-height: 24px;
+    padding: 0px;
+    margin-bottom: 16px;
+}
+
+@media (min-width: 1139px) {
+    .jWynGo {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
+    }
+}
+
+.jWynGo {
+    display: grid;
+    gap: 24px;
+}
+.cNzPbm {
+    display: flex
+;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+    max-width: 100%;
+    height: 100%;
+    border: 2px solid rgb(235, 235, 235);
+    border-radius: 8px;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+.izNmos {
+    font-family: Helvetica, Arial, sans-serif;
+    color: rgb(21, 21, 21);
+    font-size: 18px;
+    line-height: 24px;
+    margin-top: 24px;
+    margin-bottom: 0px;
+    font-weight: 500;
+}
+.bnrFKF {
+    font-family: "iFood RC Textos", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 0px;
+    display: inline-block;
+    max-width: 300px;
+    font-weight: normal;
+    color: rgb(113, 113, 113);
+}
+
+.Ewpqy {
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(235, 235, 235);
+    margin-top: 8px;
+    padding: 0px;
+    margin-bottom: 40px;
+}
+
+.VKNTj {
+    display: flex
+;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+.dGHDvZ {
+    display: flex
+;
+}
+.jAqlyU {
+    font-family: "iFood RC Textos", Helvetica, Arial, sans-serif;
+    color: rgb(21, 21, 21);
+    font-size: 18px;
+    line-height: 24px;
+    margin: 0px 0px 0px 18px;
+    font-weight: 500;
+}
+
+claEbR:hover {
+    text-decoration: none;
+}
+
+a:hover, a:not([href]):not([tabindex]):hover {
+    color: rgba(234, 29, 44, .8);
+    text-decoration: underline;
+}
+.iNdQGU {
+    display: flex
+;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+    max-width: 100%;
+    height: 100%;
+    border: 2px solid rgb(235, 235, 235);
+    border-radius: 8px;
+}
+.iNdQGU:hover {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(235, 0, 51);
+    border-radius: 4px;
+}
