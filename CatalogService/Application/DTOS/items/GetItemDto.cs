@@ -25,5 +25,9 @@ namespace Application.DTOS.items
         
         public string CategoryId { get; set; }
         public string Status { get; set; } // Available, Unavailable
+
+        public List<StatusByCatalog> StatusByCatalog { get; set; }
     }
+
+   
 }

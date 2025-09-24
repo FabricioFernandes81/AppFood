@@ -52,7 +52,7 @@ namespace Application.Queries.Handlers
                                     {
                                         new AvailableAt
                                         {
-                                            Id = optionsGr.GrupoOpcoes.Id.ToString(),
+                                          
                                             Name = optionsGr.GrupoOpcoes.Nome,
                                             Status = optionsGr.GrupoOpcoes.Status.ToString(),
                                         }
@@ -66,7 +66,7 @@ namespace Application.Queries.Handlers
                     // Adiciona o produto principal (item)
                     ProductDto itemDto = new ProductDto
                     {
-                        Id = product.Id.ToString(),
+                       
                         Name = product.Nome,
                         Description = product.Descricao,
                         Status = product.Status.ToString(),
@@ -77,7 +77,7 @@ namespace Application.Queries.Handlers
                             {
                                 new AvailableAt
                                 {
-                                    Id = product.Items.Categoria.Id.ToString(),
+                                   // Id = product.Items.Categoria.Id.ToString(),
                                     Name = product.Items.Categoria.Nome,
                                     Status = product.Items.Categoria.Status.ToString(),
                                 }

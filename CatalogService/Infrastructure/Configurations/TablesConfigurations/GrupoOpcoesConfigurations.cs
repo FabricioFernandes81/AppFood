@@ -13,7 +13,7 @@ namespace Infrastructure.Configurations.TablesConfigurations
     {
         public void Configure(EntityTypeBuilder<GrupoOpcoes> builder)
         {
-            builder.HasKey(g => g.Id);
+            builder.HasKey(g => g.OpcaoGrupoId);
             builder.HasIndex(g => g.OpcaoGrupoId)
                 .IsUnique();
             /*builder.HasOne(g => g.Produto)

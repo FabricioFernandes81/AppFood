@@ -25,7 +25,7 @@ const MenuCardapio = ({
 //  dispatchLoadingCardapio,
   dispatchLoadingProduto,
   dispatchLoadingCategory,
-  dispatchLoadingItems,
+  //dispatchLoadingItems,
 }) => {
   const [activeTab, setActiveTab] = useState('cardapio');
   const navigate = useNavigate();
@@ -42,7 +42,6 @@ const MenuCardapio = ({
       }
     }
   }, [selectedMerchant?.id, activeTab]);
-
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -64,7 +63,8 @@ const MenuCardapio = ({
             </div>
             {(category ?? []).map((item, index) => (
               <PainelCategoria category={item} key={index}>
-               <Items categoryId={item.categoryId} />
+               <Items categoryId={item.categoryId}
+                />
               </PainelCategoria>
             ))}
           </>

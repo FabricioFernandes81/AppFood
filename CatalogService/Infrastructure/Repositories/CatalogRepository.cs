@@ -1,4 +1,5 @@
 ﻿
+using Domain.Entities;
 using Infrastructure.Configurations;
 using Infrastructure.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,25 @@ namespace Infrastructure.Repositories
 
         public CatalogRepository(ContextCatalogs contextCatalogs)
         {
-            _contextCatalogs = contextCatalogs ?? throw new (nameof(contextCatalogs));
+            _contextCatalogs = contextCatalogs;
         }
 
-       
+        public async Task<List<Catalogo>> GetAll(Guid catalogId, Guid merchantId)
+        {
+            var entity = await _contextCatalogs.Catalogos
+                .Include(c=>c.Contexto)
+                .ToListAsync();
+
+                return entity;
+        }
+
+        public async Task<List<Catalogo>> GetCatalogsByMerchantIdAsync(Guid merchantId)
+        {
+           var entity = await _contextCatalogs.Catalogos
+                .Where(c=>c.ComercioId == merchantId)
+                .ToListAsync();
+            
+            return entity;
+        }
     }
 }

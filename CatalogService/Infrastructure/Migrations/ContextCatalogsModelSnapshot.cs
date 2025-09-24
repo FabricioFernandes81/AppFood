@@ -22,18 +22,66 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.Categoria", b =>
+            modelBuilder.Entity("Domain.Entities.Catalogo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("CatalogoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid>("CategoriaId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ComercioUId")
+                    b.Property<Guid>("CatalogoGrupo")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ComercioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Disponivel")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
+                    b.HasKey("CatalogoId");
+
+                    b.HasIndex("CatalogoId")
+                        .IsUnique();
+
+                    b.ToTable("Catalogos");
+
+                    b.HasData(
+                        new
+                        {
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            CatalogoGrupo = new Guid("ffca0022-eb43-4205-9a1b-73a72f8e3f95"),
+                            ComercioId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 56, DateTimeKind.Local).AddTicks(6689),
+                            Descricao = "Cardápio Principal do comércio",
+                            Disponivel = true,
+                            Nome = "Cardápio Principal",
+                            Status = 1,
+                            Tipo = 0
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.Categoria", b =>
+                {
+                    b.Property<Guid>("CategoriaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CatalogoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataCriacao")
@@ -55,7 +103,9 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Tipo")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CategoriaId");
+
+                    b.HasIndex("CatalogoId");
 
                     b.HasIndex("CategoriaId")
                         .IsUnique();
@@ -65,142 +115,132 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
                             CategoriaId = new Guid("c1a5f8e2-3b6d-4f8e-9c7e-0d8f9a1b2c3d"),
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 358, DateTimeKind.Local).AddTicks(2591),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 59, DateTimeKind.Local).AddTicks(569),
                             Descricao = "Categoria de Pizzas Tradicionais",
                             Index = 0,
-                            Nome = "Pizzas",
+                            Nome = "Pizzas Tradicionais",
                             Status = 1,
                             Tipo = 1
                         },
                         new
                         {
-                            Id = 2,
                             CategoriaId = new Guid("d2b6f9e3-4c7e-5f9f-0d8f-1a2b3c4d5e6f"),
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 361, DateTimeKind.Local).AddTicks(8927),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 59, DateTimeKind.Local).AddTicks(1204),
                             Descricao = "Categoria de Massas para Pizzas",
                             Index = 1,
                             Nome = "Lanches Rápidos",
                             Status = 1,
                             Tipo = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoriaId = new Guid("68a418a3-ae7f-4623-8afc-35afbeed4b15"),
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 361, DateTimeKind.Local).AddTicks(8960),
-                            Descricao = "Categoria de Pizzas Doces",
-                            Index = 2,
-                            Nome = "Pizza Doces",
-                            Status = 1,
-                            Tipo = 1
                         });
                 });
 
             modelBuilder.Entity("Domain.Entities.Contexto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid>("ContextoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("OpcaoId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CatalogoId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("parentOptionId")
+                    b.Property<int>("ContextoType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("parentOptionId");
+                    b.HasIndex("CatalogoId");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
 
                     b.ToTable("Contextos");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            ContextoId = new Guid("1cdb162b-7632-4876-8535-76701e7acde2"),
-                            OpcaoId = 1,
-                            Status = 1,
-                            parentOptionId = 3
+                            Id = new Guid("0c5dfc17-fb38-44d5-8840-328e6b0c4293"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 0
                         },
                         new
                         {
-                            Id = 2,
-                            ContextoId = new Guid("796b05b5-88d9-4793-a9ff-1cc5abe78db5"),
-                            OpcaoId = 1,
+                            Id = new Guid("53e952f7-6a1f-427b-8d82-156d48ec960e"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 1
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.CustomizacaoModificacoes", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("customizationOptionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("parentCustomizationOptionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("customizationOptionId");
+
+                    b.HasIndex("parentCustomizationOptionId");
+
+                    b.ToTable("CustomizacaoModificacoes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fe66f09c-aee6-4496-9771-6f6e3af407c8"),
+                            ItemId = new Guid("289a4fbe-18b9-4506-b21f-2957f5919fbc"),
                             Status = 1,
-                            parentOptionId = 3
+                            customizationOptionId = new Guid("0d58a046-1871-433d-bd8d-2b33abfbfa70"),
+                            parentCustomizationOptionId = new Guid("945ef3bc-7741-4bec-a0ce-4660c09a564f")
                         },
                         new
                         {
-                            Id = 3,
-                            ContextoId = new Guid("fe76c116-3197-4893-aeb1-e1229d837d30"),
-                            OpcaoId = 1,
+                            Id = new Guid("40da28b6-2c2e-4392-ae97-f1101e1893f6"),
+                            ItemId = new Guid("289a4fbe-18b9-4506-b21f-2957f5919fbc"),
                             Status = 1,
-                            parentOptionId = 4
+                            customizationOptionId = new Guid("0d58a046-1871-433d-bd8d-2b33abfbfa70"),
+                            parentCustomizationOptionId = new Guid("2587c76e-3aa3-45e6-95d9-35c21ac19f9d")
                         },
                         new
                         {
-                            Id = 4,
-                            ContextoId = new Guid("ef61b0f2-31a3-45bb-ad6c-a00895849d5f"),
-                            OpcaoId = 2,
+                            Id = new Guid("88cf4471-0899-47e3-89cd-6003ef006cb0"),
+                            ItemId = new Guid("289a4fbe-18b9-4506-b21f-2957f5919fbc"),
                             Status = 1,
-                            parentOptionId = 4
+                            customizationOptionId = new Guid("a4eb62d0-ca33-459e-82b1-4de25997ba9e"),
+                            parentCustomizationOptionId = new Guid("945ef3bc-7741-4bec-a0ce-4660c09a564f")
                         },
                         new
                         {
-                            Id = 5,
-                            ContextoId = new Guid("1bb9af44-966e-4b5d-8d7b-f0def1d0ab82"),
-                            OpcaoId = 13,
+                            Id = new Guid("147635af-235d-4e7c-a2c5-899fc6fe5ca8"),
+                            ItemId = new Guid("289a4fbe-18b9-4506-b21f-2957f5919fbc"),
                             Status = 1,
-                            parentOptionId = 10
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ContextoId = new Guid("84b1c768-2871-4019-824f-01defec03ea3"),
-                            OpcaoId = 14,
-                            Status = 1,
-                            parentOptionId = 10
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ContextoId = new Guid("13f23287-785b-4b15-ba32-4bae9e4fa251"),
-                            OpcaoId = 14,
-                            Status = 1,
-                            parentOptionId = 10
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ContextoId = new Guid("c3520267-072b-4dd6-84c5-9c882680797f"),
-                            OpcaoId = 14,
-                            Status = 1,
-                            parentOptionId = 11
+                            customizationOptionId = new Guid("a4eb62d0-ca33-459e-82b1-4de25997ba9e"),
+                            parentCustomizationOptionId = new Guid("2587c76e-3aa3-45e6-95d9-35c21ac19f9d")
                         });
                 });
 
             modelBuilder.Entity("Domain.Entities.GrupoOpcoes", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("OpcaoGrupoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
@@ -217,16 +257,13 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("OpcaoGrupoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("ResourceGroupoType")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("OpcaoGrupoId");
 
                     b.HasIndex("OpcaoGrupoId")
                         .IsUnique();
@@ -236,109 +273,67 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 367, DateTimeKind.Local).AddTicks(7967),
-                            Index = 0,
-                            Max = 1,
-                            Min = 0,
-                            Nome = "Tamanhos",
-                            OpcaoGrupoId = new Guid("15af8bd9-6d54-43f2-8c74-43d5d4da32d8"),
-                            ResourceGroupoType = 1,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 367, DateTimeKind.Local).AddTicks(9122),
-                            Index = 0,
-                            Max = 1,
-                            Min = 0,
-                            Nome = "Massas",
-                            OpcaoGrupoId = new Guid("26b1a876-7ee4-4f15-9bb1-d33c840c5049"),
-                            ResourceGroupoType = 2,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 367, DateTimeKind.Local).AddTicks(9130),
-                            Index = 0,
-                            Max = 5,
-                            Min = 0,
-                            Nome = "Bordas",
-                            OpcaoGrupoId = new Guid("668a93a9-704e-4036-a515-11e4ddbe4129"),
-                            ResourceGroupoType = 3,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 367, DateTimeKind.Local).AddTicks(9135),
-                            Index = 0,
-                            Max = 1,
-                            Min = 0,
-                            Nome = "Sabores",
-                            OpcaoGrupoId = new Guid("d1eed8e6-c1f0-4f09-a235-2d459bb33cbb"),
-                            ResourceGroupoType = 4,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 367, DateTimeKind.Local).AddTicks(9140),
+                            OpcaoGrupoId = new Guid("1e5e5eb5-84c7-4eca-b0c1-921860434f70"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 61, DateTimeKind.Local).AddTicks(957),
                             Index = 0,
                             Max = 1,
                             Min = 0,
                             Nome = "Acompanhamentos",
-                            OpcaoGrupoId = new Guid("1e5e5eb5-84c7-4eca-b0c1-921860434f70"),
                             ResourceGroupoType = 6,
                             Status = 1
                         },
                         new
                         {
-                            Id = 6,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 367, DateTimeKind.Local).AddTicks(9188),
+                            OpcaoGrupoId = new Guid("b5bcb329-4f23-4752-a738-4bfe7ed4bb46"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 61, DateTimeKind.Local).AddTicks(1246),
+                            Index = 0,
+                            Max = 1,
+                            Min = 0,
+                            Nome = "Turbine seu Lanche",
+                            ResourceGroupoType = 6,
+                            Status = 1
+                        },
+                        new
+                        {
+                            OpcaoGrupoId = new Guid("15af8bd9-6d54-43f2-8c74-43d5d4da32d8"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 61, DateTimeKind.Local).AddTicks(1248),
                             Index = 0,
                             Max = 1,
                             Min = 0,
                             Nome = "Tamanhos",
-                            OpcaoGrupoId = new Guid("b1d11fe1-f080-4dcf-847c-4fda4556b796"),
                             ResourceGroupoType = 1,
                             Status = 1
                         },
                         new
                         {
-                            Id = 7,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 367, DateTimeKind.Local).AddTicks(9193),
+                            OpcaoGrupoId = new Guid("26b1a876-7ee4-4f15-9bb1-d33c840c5049"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 61, DateTimeKind.Local).AddTicks(1250),
                             Index = 0,
                             Max = 1,
                             Min = 0,
                             Nome = "Massas",
-                            OpcaoGrupoId = new Guid("c3290906-b081-47ab-abdf-38291096b587"),
                             ResourceGroupoType = 2,
                             Status = 1
                         },
                         new
                         {
-                            Id = 8,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 367, DateTimeKind.Local).AddTicks(9198),
+                            OpcaoGrupoId = new Guid("668a93a9-704e-4036-a515-11e4ddbe4129"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 61, DateTimeKind.Local).AddTicks(1252),
                             Index = 0,
                             Max = 5,
                             Min = 0,
                             Nome = "Bordas",
-                            OpcaoGrupoId = new Guid("040377c0-6674-4bd6-a55d-6637697aed8e"),
                             ResourceGroupoType = 3,
                             Status = 1
                         },
                         new
                         {
-                            Id = 9,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 367, DateTimeKind.Local).AddTicks(9202),
+                            OpcaoGrupoId = new Guid("d1eed8e6-c1f0-4f09-a235-2d459bb33cbb"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 61, DateTimeKind.Local).AddTicks(1256),
                             Index = 0,
                             Max = 1,
                             Min = 0,
                             Nome = "Sabores",
-                            OpcaoGrupoId = new Guid("dad6ebdd-59e3-47ee-827c-0c0c3c7fa1ae"),
                             ResourceGroupoType = 4,
                             Status = 1
                         });
@@ -346,14 +341,12 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Item", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("ItemId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoriaId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CategoriaId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
@@ -361,16 +354,13 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Index")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ItemId")
+                    b.Property<Guid?>("ProdutoId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("ProdutoId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Tipo")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ItemId");
 
                     b.HasIndex("CategoriaId");
 
@@ -386,70 +376,179 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CategoriaId = 1,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 366, DateTimeKind.Local).AddTicks(4421),
+                            ItemId = new Guid("289a4fbe-18b9-4506-b21f-2957f5919fbc"),
+                            CategoriaId = new Guid("c1a5f8e2-3b6d-4f8e-9c7e-0d8f9a1b2c3d"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 59, DateTimeKind.Local).AddTicks(6976),
                             Index = 0,
-                            ItemId = new Guid("05a9521e-183a-4d39-b6e4-0a0fbb9f6c44"),
-                            ProdutoId = 1,
+                            ProdutoId = new Guid("51b644cc-a90c-4456-992f-f86631176796"),
                             Tipo = 1
                         },
                         new
                         {
-                            Id = 2,
-                            CategoriaId = 2,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 366, DateTimeKind.Local).AddTicks(5204),
+                            ItemId = new Guid("56b5c746-57d8-4964-bc3b-46eb18658208"),
+                            CategoriaId = new Guid("d2b6f9e3-4c7e-5f9f-0d8f-1a2b3c4d5e6f"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 59, DateTimeKind.Local).AddTicks(7652),
                             Index = 0,
-                            ItemId = new Guid("4c4d3948-69f0-4366-85e2-a735e08f7e29"),
-                            ProdutoId = 10,
+                            ProdutoId = new Guid("62133b9f-5542-401d-8743-49ec7da8c847"),
                             Tipo = 0
                         },
                         new
                         {
-                            Id = 3,
-                            CategoriaId = 3,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 366, DateTimeKind.Local).AddTicks(5210),
+                            ItemId = new Guid("0c8eb292-8786-4707-8025-95a3d834da68"),
+                            CategoriaId = new Guid("d2b6f9e3-4c7e-5f9f-0d8f-1a2b3c4d5e6f"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 59, DateTimeKind.Local).AddTicks(7655),
                             Index = 0,
-                            ItemId = new Guid("87ab51ea-5e29-4d68-bd5d-827f95893357"),
-                            ProdutoId = 12,
-                            Tipo = 1
+                            ProdutoId = new Guid("ccea5142-1b90-40d9-b35d-72685950260b"),
+                            Tipo = 0
                         },
                         new
                         {
-                            Id = 4,
-                            CategoriaId = 2,
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 366, DateTimeKind.Local).AddTicks(5214),
+                            ItemId = new Guid("b8a99cea-8dbb-426a-bfe0-058fc44333f6"),
+                            CategoriaId = new Guid("d2b6f9e3-4c7e-5f9f-0d8f-1a2b3c4d5e6f"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 59, DateTimeKind.Local).AddTicks(7659),
                             Index = 0,
-                            ItemId = new Guid("e837cd76-c1b1-496d-853f-749eca1f0c03"),
-                            ProdutoId = 11,
+                            ProdutoId = new Guid("4f3560c5-a6f3-40c9-885e-2e7e7ee4e9d0"),
+                            Tipo = 0
+                        },
+                        new
+                        {
+                            ItemId = new Guid("fa71f64b-55d1-4f50-91a7-5ce4d5b72ee5"),
+                            CategoriaId = new Guid("d2b6f9e3-4c7e-5f9f-0d8f-1a2b3c4d5e6f"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 59, DateTimeKind.Local).AddTicks(7661),
+                            Index = 0,
+                            ProdutoId = new Guid("39b52e42-c21e-408b-9fa2-d2cccef926d1"),
                             Tipo = 0
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.Opcoes", b =>
+            modelBuilder.Entity("Domain.Entities.ModificacaoContextoItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Fracoes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("OpcaoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("OpcoesGrupoId")
+                    b.Property<Guid>("CatalogoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ContextoType")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProdutoId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CatalogoId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("ContextoItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e756e2f8-cb5a-4ddb-92d5-ab318a34611e"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 0,
+                            ItemId = new Guid("0c8eb292-8786-4707-8025-95a3d834da68"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("1f6eb8b1-8bdf-4df0-9115-a6dc7fb24e7b"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 1,
+                            ItemId = new Guid("0c8eb292-8786-4707-8025-95a3d834da68"),
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("9014b9ab-a3d0-49a6-80d6-5a596f2203d2"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 0,
+                            ItemId = new Guid("b8a99cea-8dbb-426a-bfe0-058fc44333f6"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("95fcc2a8-02ac-4a85-a7fc-67d3ba970f67"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 1,
+                            ItemId = new Guid("b8a99cea-8dbb-426a-bfe0-058fc44333f6"),
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("eba99296-dda0-45bb-be6b-7475dae58432"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 0,
+                            ItemId = new Guid("56b5c746-57d8-4964-bc3b-46eb18658208"),
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("b1ca6706-97ba-47e7-907e-68486ff81b91"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 1,
+                            ItemId = new Guid("56b5c746-57d8-4964-bc3b-46eb18658208"),
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("068b5586-48b4-4f17-9ee2-6195b92615c3"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 0,
+                            ItemId = new Guid("fa71f64b-55d1-4f50-91a7-5ce4d5b72ee5"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("df747025-8547-4eef-8c7b-36d8b4df3f27"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 1,
+                            ItemId = new Guid("fa71f64b-55d1-4f50-91a7-5ce4d5b72ee5"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("a143c9ed-dffb-4d66-87f3-3a17120afb33"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 0,
+                            ItemId = new Guid("289a4fbe-18b9-4506-b21f-2957f5919fbc"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("93fbbdbb-8bf3-4450-9752-5bc629d7c581"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            ContextoType = 1,
+                            ItemId = new Guid("289a4fbe-18b9-4506-b21f-2957f5919fbc"),
+                            Status = 0
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.Opcoes", b =>
+                {
+                    b.Property<Guid>("OpcaoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Fracoes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("OpcoesGrupoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("OpcaoId");
 
                     b.HasIndex("OpcaoId")
                         .IsUnique();
@@ -463,140 +562,85 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            Fracoes = "1",
+                            OpcaoId = new Guid("d76aca65-4303-4a4d-a046-4c93151a4d67"),
+                            OpcoesGrupoId = new Guid("b5bcb329-4f23-4752-a738-4bfe7ed4bb46"),
+                            ProdutoId = new Guid("a36cbbdf-7c06-4bde-8cf3-e99efc7603fa"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            OpcaoId = new Guid("aecc1532-da5e-444f-8989-519012edf46e"),
+                            OpcoesGrupoId = new Guid("b5bcb329-4f23-4752-a738-4bfe7ed4bb46"),
+                            ProdutoId = new Guid("8d86a76d-9585-440e-9482-457392deff8d"),
+                            Status = 1
+                        },
+                        new
+                        {
                             OpcaoId = new Guid("945ef3bc-7741-4bec-a0ce-4660c09a564f"),
-                            OpcoesGrupoId = 1,
-                            ProdutoId = 4,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Fracoes = "1,2",
-                            OpcaoId = new Guid("2587c76e-3aa3-45e6-95d9-35c21ac19f9d"),
-                            OpcoesGrupoId = 1,
-                            ProdutoId = 5,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            OpcaoId = new Guid("0d58a046-1871-433d-bd8d-2b33abfbfa70"),
-                            OpcoesGrupoId = 4,
-                            ProdutoId = 8,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            OpcaoId = new Guid("a4eb62d0-ca33-459e-82b1-4de25997ba9e"),
-                            OpcoesGrupoId = 4,
-                            ProdutoId = 9,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            OpcaoId = new Guid("cc71b438-523f-49ac-918a-82df71244f9b"),
-                            OpcoesGrupoId = 3,
-                            ProdutoId = 6,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            OpcaoId = new Guid("df8728b2-7773-486b-aa93-47627bdd0c54"),
-                            OpcoesGrupoId = 3,
-                            ProdutoId = 7,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            OpcaoId = new Guid("7fb0eac3-43e5-41c6-860e-a38793db4988"),
-                            OpcoesGrupoId = 2,
-                            ProdutoId = 2,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            OpcaoId = new Guid("d0d0df88-b276-4a21-ab14-063e8f0c3c5d"),
-                            OpcoesGrupoId = 2,
-                            ProdutoId = 3,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 9,
-                            OpcaoId = new Guid("d3e31829-a215-47e3-9576-3fddec9417ec"),
-                            OpcoesGrupoId = 5,
-                            ProdutoId = 11,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 10,
-                            OpcaoId = new Guid("d0ea62e8-dd70-4744-b240-e0da591dd118"),
-                            OpcoesGrupoId = 9,
-                            ProdutoId = 13,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 11,
-                            OpcaoId = new Guid("9929499b-60b9-409d-90dc-0cf4db0c4535"),
-                            OpcoesGrupoId = 9,
-                            ProdutoId = 14,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 12,
-                            OpcaoId = new Guid("b94317db-7b78-4724-b4c1-dd05020654c6"),
-                            OpcoesGrupoId = 7,
-                            ProdutoId = 15,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 13,
                             Fracoes = "1",
-                            OpcaoId = new Guid("ad163e58-13b9-497b-8133-41d4f6d9cb1e"),
-                            OpcoesGrupoId = 6,
-                            ProdutoId = 16,
+                            OpcoesGrupoId = new Guid("15af8bd9-6d54-43f2-8c74-43d5d4da32d8"),
+                            ProdutoId = new Guid("27fa98cd-e119-432d-9b0a-8f99a65be1b7"),
                             Status = 1
                         },
                         new
                         {
-                            Id = 14,
+                            OpcaoId = new Guid("2587c76e-3aa3-45e6-95d9-35c21ac19f9d"),
                             Fracoes = "1,2",
-                            OpcaoId = new Guid("d7748cc9-1a02-4a3f-9b1c-0b7094460a1b"),
-                            OpcoesGrupoId = 6,
-                            ProdutoId = 17,
+                            OpcoesGrupoId = new Guid("15af8bd9-6d54-43f2-8c74-43d5d4da32d8"),
+                            ProdutoId = new Guid("932e18a2-396d-40d2-8de4-da0cf8f95faf"),
                             Status = 1
                         },
                         new
                         {
-                            Id = 15,
-                            Fracoes = "1,2,3",
-                            OpcaoId = new Guid("273a28f8-3d7f-4164-8ced-3e18ad650181"),
-                            OpcoesGrupoId = 6,
-                            ProdutoId = 18,
+                            OpcaoId = new Guid("7fb0eac3-43e5-41c6-860e-a38793db4988"),
+                            OpcoesGrupoId = new Guid("26b1a876-7ee4-4f15-9bb1-d33c840c5049"),
+                            ProdutoId = new Guid("9f72cd07-4463-4bfc-8fc1-97129c775e21"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            OpcaoId = new Guid("d0d0df88-b276-4a21-ab14-063e8f0c3c5d"),
+                            OpcoesGrupoId = new Guid("26b1a876-7ee4-4f15-9bb1-d33c840c5049"),
+                            ProdutoId = new Guid("c8eff6c6-f3c5-48ec-9a5b-aa5b3eeec582"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            OpcaoId = new Guid("cc71b438-523f-49ac-918a-82df71244f9b"),
+                            OpcoesGrupoId = new Guid("668a93a9-704e-4036-a515-11e4ddbe4129"),
+                            ProdutoId = new Guid("e4ac0247-33ed-476a-ae69-363f27fe0df7"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            OpcaoId = new Guid("df8728b2-7773-486b-aa93-47627bdd0c54"),
+                            OpcoesGrupoId = new Guid("668a93a9-704e-4036-a515-11e4ddbe4129"),
+                            ProdutoId = new Guid("eb021b00-0fef-434b-9da5-77e4dbca047e"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            OpcaoId = new Guid("0d58a046-1871-433d-bd8d-2b33abfbfa70"),
+                            OpcoesGrupoId = new Guid("d1eed8e6-c1f0-4f09-a235-2d459bb33cbb"),
+                            ProdutoId = new Guid("d6ae0c15-4db9-454e-868b-a9ec7719da5e"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            OpcaoId = new Guid("a4eb62d0-ca33-459e-82b1-4de25997ba9e"),
+                            OpcoesGrupoId = new Guid("d1eed8e6-c1f0-4f09-a235-2d459bb33cbb"),
+                            ProdutoId = new Guid("b4a093cc-7e4a-49d2-909a-fed1cc58c572"),
                             Status = 1
                         });
                 });
 
             modelBuilder.Entity("Domain.Entities.Produto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("ProdutoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid>("ComercioUId")
+                    b.Property<Guid>("CatalogoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataCriacao")
@@ -618,9 +662,6 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Peso")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ProdutoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.PrimitiveCollection<string>("RestriocaoAlimentar")
                         .HasColumnType("nvarchar(max)");
 
@@ -633,7 +674,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Unidade")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProdutoId");
+
+                    b.HasIndex("CatalogoId");
 
                     b.HasIndex("ProdutoId")
                         .IsUnique();
@@ -643,237 +686,181 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(3928),
-                            IsIndustrializado = false,
-                            Nome = "Pizzas Tradicionais",
-                            Peso = 10,
-                            ProdutoId = new Guid("51b644cc-a90c-4456-992f-f86631176796"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "kg"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(5353),
-                            IsIndustrializado = false,
-                            Nome = "Massa Tradicional",
-                            Peso = 5,
-                            ProdutoId = new Guid("9f72cd07-4463-4bfc-8fc1-97129c775e21"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(5364),
-                            IsIndustrializado = false,
-                            Nome = "Massa fina",
-                            Peso = 5,
-                            ProdutoId = new Guid("c8eff6c6-f3c5-48ec-9a5b-aa5b3eeec582"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(5373),
-                            IsIndustrializado = false,
-                            Nome = "Tamanho Médio",
-                            Peso = 5,
-                            ProdutoId = new Guid("27fa98cd-e119-432d-9b0a-8f99a65be1b7"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(5381),
-                            IsIndustrializado = false,
-                            Nome = "Tamanho Grande",
-                            Peso = 5,
-                            ProdutoId = new Guid("932e18a2-396d-40d2-8de4-da0cf8f95faf"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(5407),
-                            IsIndustrializado = false,
-                            Nome = "Borda Tradicional",
-                            Peso = 5,
-                            ProdutoId = new Guid("e4ac0247-33ed-476a-ae69-363f27fe0df7"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(5416),
-                            IsIndustrializado = false,
-                            Nome = "Borda Recheada",
-                            Peso = 5,
-                            ProdutoId = new Guid("eb021b00-0fef-434b-9da5-77e4dbca047e"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(5424),
-                            IsIndustrializado = false,
-                            Nome = "Calabresa",
-                            Peso = 5,
-                            ProdutoId = new Guid("d6ae0c15-4db9-454e-868b-a9ec7719da5e"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(5431),
-                            IsIndustrializado = false,
-                            Nome = "Frango com Catupiry",
-                            Peso = 5,
-                            ProdutoId = new Guid("b4a093cc-7e4a-49d2-909a-fed1cc58c572"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(5440),
-                            Descricao = "Pão, carne, queijo e salada",
+                            ProdutoId = new Guid("62133b9f-5542-401d-8743-49ec7da8c847"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(5837),
+                            Descricao = "Hamburguer, Queijo, Presunto e Maionese",
                             Ean = "7891234567890",
                             IsIndustrializado = false,
                             Nome = "X-Burger",
                             Peso = 5,
-                            ProdutoId = new Guid("62133b9f-5542-401d-8743-49ec7da8c847"),
                             Serving = 1,
                             Status = 1,
                             Unidade = "g"
                         },
                         new
                         {
-                            Id = 11,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(6631),
-                            Descricao = "200 g",
+                            ProdutoId = new Guid("ccea5142-1b90-40d9-b35d-72685950260b"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6762),
+                            Descricao = "",
                             IsIndustrializado = false,
-                            Nome = "Batata Frita",
-                            Peso = 5,
-                            ProdutoId = new Guid("713713e7-641e-44fd-bd92-13ba43daf6a8"),
-                            Serving = 0,
+                            Nome = "X-Salada",
+                            Peso = 0,
+                            Serving = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            ProdutoId = new Guid("4f3560c5-a6f3-40c9-885e-2e7e7ee4e9d0"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6767),
+                            Descricao = "Milho, Tomate, Alface, Queijo, Hamburguer, Frango e Maionese",
+                            IsIndustrializado = false,
+                            Nome = "X-Frango",
+                            Peso = 0,
+                            Serving = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            ProdutoId = new Guid("39b52e42-c21e-408b-9fa2-d2cccef926d1"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6770),
+                            Descricao = "Milho, Tomate, Alface, Queijo, Carne e Maionese",
+                            IsIndustrializado = false,
+                            Nome = "X- Gaúcho",
+                            Peso = 0,
+                            Serving = 1,
+                            Status = 0
+                        },
+                        new
+                        {
+                            ProdutoId = new Guid("8d86a76d-9585-440e-9482-457392deff8d"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6773),
+                            IsIndustrializado = false,
+                            Nome = "Fritas P",
+                            Peso = 200,
+                            Serving = 1,
                             Status = 1,
                             Unidade = "g"
                         },
                         new
                         {
-                            Id = 12,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(6708),
+                            ProdutoId = new Guid("a36cbbdf-7c06-4bde-8cf3-e99efc7603fa"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6780),
                             IsIndustrializado = false,
-                            Nome = "Pizzas Doces",
+                            Nome = "Bife",
+                            Peso = 0,
+                            Serving = 0,
+                            Status = 0
+                        },
+                        new
+                        {
+                            ProdutoId = new Guid("51b644cc-a90c-4456-992f-f86631176796"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6784),
+                            IsIndustrializado = false,
+                            Nome = "Pizzas Tradicionais",
                             Peso = 10,
-                            ProdutoId = new Guid("8e5eb648-9591-428a-a08d-edaca8930dac"),
                             Serving = 0,
                             Status = 1,
                             Unidade = "kg"
                         },
                         new
                         {
-                            Id = 13,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(6714),
-                            IsIndustrializado = false,
-                            Nome = "Chocolate",
-                            Peso = 5,
-                            ProdutoId = new Guid("7c1ada9c-13f8-40cf-9d43-057b4c0e2559"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(6719),
-                            IsIndustrializado = false,
-                            Nome = "Morango com Chocolate",
-                            Peso = 5,
-                            ProdutoId = new Guid("7a66e116-8825-4b92-9816-60b1328018a1"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(6724),
-                            IsIndustrializado = false,
-                            Nome = "Massa Tradicional Doces",
-                            Peso = 5,
-                            ProdutoId = new Guid("df287fd9-f27d-43dc-be1e-53fd1a4ad1cd"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(6728),
-                            IsIndustrializado = false,
-                            Nome = "Tamanho Pequeno",
-                            Peso = 5,
-                            ProdutoId = new Guid("bc90f374-9f12-4914-80f9-fbc1147a0ced"),
-                            Serving = 0,
-                            Status = 1,
-                            Unidade = "g"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(6733),
+                            ProdutoId = new Guid("27fa98cd-e119-432d-9b0a-8f99a65be1b7"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6787),
                             IsIndustrializado = false,
                             Nome = "Tamanho Médio",
                             Peso = 5,
-                            ProdutoId = new Guid("33b0b559-eecd-4076-a46b-2e3e78681953"),
                             Serving = 0,
                             Status = 1,
                             Unidade = "g"
                         },
                         new
                         {
-                            Id = 18,
-                            ComercioUId = new Guid("b1c8f3d2-4e5f-4b6a-9c7e-0d8f9a1b2c3d"),
-                            DataCriacao = new DateTime(2025, 8, 28, 19, 59, 18, 365, DateTimeKind.Local).AddTicks(6747),
+                            ProdutoId = new Guid("932e18a2-396d-40d2-8de4-da0cf8f95faf"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6789),
                             IsIndustrializado = false,
                             Nome = "Tamanho Grande",
                             Peso = 5,
-                            ProdutoId = new Guid("6089df30-830f-4e04-a43d-8e476ab176d5"),
+                            Serving = 0,
+                            Status = 1,
+                            Unidade = "g"
+                        },
+                        new
+                        {
+                            ProdutoId = new Guid("9f72cd07-4463-4bfc-8fc1-97129c775e21"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6792),
+                            IsIndustrializado = false,
+                            Nome = "Massa Tradicional",
+                            Peso = 5,
+                            Serving = 0,
+                            Status = 1,
+                            Unidade = "g"
+                        },
+                        new
+                        {
+                            ProdutoId = new Guid("c8eff6c6-f3c5-48ec-9a5b-aa5b3eeec582"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6795),
+                            IsIndustrializado = false,
+                            Nome = "Massa fina",
+                            Peso = 5,
+                            Serving = 0,
+                            Status = 1,
+                            Unidade = "g"
+                        },
+                        new
+                        {
+                            ProdutoId = new Guid("e4ac0247-33ed-476a-ae69-363f27fe0df7"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6797),
+                            IsIndustrializado = false,
+                            Nome = "Borda Tradicional",
+                            Peso = 5,
+                            Serving = 0,
+                            Status = 1,
+                            Unidade = "g"
+                        },
+                        new
+                        {
+                            ProdutoId = new Guid("eb021b00-0fef-434b-9da5-77e4dbca047e"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6800),
+                            IsIndustrializado = false,
+                            Nome = "Borda Recheada",
+                            Peso = 5,
+                            Serving = 0,
+                            Status = 1,
+                            Unidade = "g"
+                        },
+                        new
+                        {
+                            ProdutoId = new Guid("d6ae0c15-4db9-454e-868b-a9ec7719da5e"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6802),
+                            IsIndustrializado = false,
+                            Nome = "Calabresa",
+                            Peso = 5,
+                            Serving = 0,
+                            Status = 1,
+                            Unidade = "g"
+                        },
+                        new
+                        {
+                            ProdutoId = new Guid("b4a093cc-7e4a-49d2-909a-fed1cc58c572"),
+                            CatalogoId = new Guid("50f8a1fc-1672-43e0-8746-aadcb005a3da"),
+                            DataCriacao = new DateTime(2025, 9, 17, 21, 43, 19, 60, DateTimeKind.Local).AddTicks(6804),
+                            IsIndustrializado = false,
+                            Nome = "Frango com Catupiry",
+                            Peso = 5,
                             Serving = 0,
                             Status = 1,
                             Unidade = "g"
@@ -882,11 +869,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Juncoes.ProdutoOpcoesGrupo", b =>
                 {
-                    b.Property<int>("GrupoId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("GrupoId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("GrupoId", "ProdutoId");
 
@@ -897,65 +884,83 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            GrupoId = 1,
-                            ProdutoId = 1
+                            GrupoId = new Guid("1e5e5eb5-84c7-4eca-b0c1-921860434f70"),
+                            ProdutoId = new Guid("62133b9f-5542-401d-8743-49ec7da8c847")
                         },
                         new
                         {
-                            GrupoId = 2,
-                            ProdutoId = 1
+                            GrupoId = new Guid("b5bcb329-4f23-4752-a738-4bfe7ed4bb46"),
+                            ProdutoId = new Guid("ccea5142-1b90-40d9-b35d-72685950260b")
                         },
                         new
                         {
-                            GrupoId = 3,
-                            ProdutoId = 1
+                            GrupoId = new Guid("15af8bd9-6d54-43f2-8c74-43d5d4da32d8"),
+                            ProdutoId = new Guid("51b644cc-a90c-4456-992f-f86631176796")
                         },
                         new
                         {
-                            GrupoId = 4,
-                            ProdutoId = 1
+                            GrupoId = new Guid("26b1a876-7ee4-4f15-9bb1-d33c840c5049"),
+                            ProdutoId = new Guid("51b644cc-a90c-4456-992f-f86631176796")
                         },
                         new
                         {
-                            GrupoId = 5,
-                            ProdutoId = 10
+                            GrupoId = new Guid("668a93a9-704e-4036-a515-11e4ddbe4129"),
+                            ProdutoId = new Guid("51b644cc-a90c-4456-992f-f86631176796")
                         },
                         new
                         {
-                            GrupoId = 6,
-                            ProdutoId = 12
-                        },
-                        new
-                        {
-                            GrupoId = 7,
-                            ProdutoId = 12
-                        },
-                        new
-                        {
-                            GrupoId = 8,
-                            ProdutoId = 12
-                        },
-                        new
-                        {
-                            GrupoId = 9,
-                            ProdutoId = 12
-                        },
-                        new
-                        {
-                            GrupoId = 5,
-                            ProdutoId = 11
+                            GrupoId = new Guid("d1eed8e6-c1f0-4f09-a235-2d459bb33cbb"),
+                            ProdutoId = new Guid("51b644cc-a90c-4456-992f-f86631176796")
                         });
+                });
+
+            modelBuilder.Entity("Domain.Entities.Categoria", b =>
+                {
+                    b.HasOne("Domain.Entities.Catalogo", "Catalogo")
+                        .WithMany("Categorias")
+                        .HasForeignKey("CatalogoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Catalogo");
                 });
 
             modelBuilder.Entity("Domain.Entities.Contexto", b =>
                 {
-                    b.HasOne("Domain.Entities.Opcoes", "Opcao")
-                        .WithMany("Context")
-                        .HasForeignKey("parentOptionId")
+                    b.HasOne("Domain.Entities.Catalogo", "Catalogo")
+                        .WithMany("Contexto")
+                        .HasForeignKey("CatalogoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Opcao");
+                    b.Navigation("Catalogo");
+                });
+
+            modelBuilder.Entity("Domain.Entities.CustomizacaoModificacoes", b =>
+                {
+                    b.HasOne("Domain.Entities.Item", "Item")
+                        .WithMany("CustomizacaoModificacoes")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Opcoes", "Opcoes")
+                        .WithMany("CustomizacaoModificacoes")
+                        .HasForeignKey("customizationOptionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Opcoes", "parentCustomizationOptions")
+                        .WithMany("ParentCustomizacaoModificacoes")
+                        .HasForeignKey("parentCustomizationOptionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+
+                    b.Navigation("Opcoes");
+
+                    b.Navigation("parentCustomizationOptions");
                 });
 
             modelBuilder.Entity("Domain.Entities.Item", b =>
@@ -975,6 +980,25 @@ namespace Infrastructure.Migrations
                     b.Navigation("Produto");
                 });
 
+            modelBuilder.Entity("Domain.Entities.ModificacaoContextoItem", b =>
+                {
+                    b.HasOne("Domain.Entities.Catalogo", "Catalogo")
+                        .WithMany("ContextoItems")
+                        .HasForeignKey("CatalogoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Item", "Item")
+                        .WithMany("ContextoItems")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Catalogo");
+
+                    b.Navigation("Item");
+                });
+
             modelBuilder.Entity("Domain.Entities.Opcoes", b =>
                 {
                     b.HasOne("Domain.Entities.GrupoOpcoes", "GrupoOpcoes")
@@ -984,12 +1008,23 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.Produto", "Produto")
-                        .WithMany()
+                        .WithMany("Opcoes")
                         .HasForeignKey("ProdutoId");
 
                     b.Navigation("GrupoOpcoes");
 
                     b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Produto", b =>
+                {
+                    b.HasOne("Domain.Entities.Catalogo", "Catalogo")
+                        .WithMany()
+                        .HasForeignKey("CatalogoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Catalogo");
                 });
 
             modelBuilder.Entity("Domain.Juncoes.ProdutoOpcoesGrupo", b =>
@@ -1011,6 +1046,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Produto");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Catalogo", b =>
+                {
+                    b.Navigation("Categorias");
+
+                    b.Navigation("Contexto");
+
+                    b.Navigation("ContextoItems");
+                });
+
             modelBuilder.Entity("Domain.Entities.Categoria", b =>
                 {
                     b.Navigation("Items");
@@ -1023,14 +1067,25 @@ namespace Infrastructure.Migrations
                     b.Navigation("ProdutoOpcoesGrupo");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Item", b =>
+                {
+                    b.Navigation("ContextoItems");
+
+                    b.Navigation("CustomizacaoModificacoes");
+                });
+
             modelBuilder.Entity("Domain.Entities.Opcoes", b =>
                 {
-                    b.Navigation("Context");
+                    b.Navigation("CustomizacaoModificacoes");
+
+                    b.Navigation("ParentCustomizacaoModificacoes");
                 });
 
             modelBuilder.Entity("Domain.Entities.Produto", b =>
                 {
                     b.Navigation("Items");
+
+                    b.Navigation("Opcoes");
 
                     b.Navigation("ProdutoOpcoesGrupo");
                 });

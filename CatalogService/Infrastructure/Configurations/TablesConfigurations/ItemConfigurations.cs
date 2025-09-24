@@ -13,7 +13,7 @@ namespace Infrastructure.Configurations.TablesConfigurations
     {
         public void Configure(EntityTypeBuilder<Item> builder)
         {
-            builder.HasKey(i => i.Id);
+            builder.HasKey(i => i.ItemId);
 
             builder.HasIndex(i => i.ItemId)
                 .IsUnique();

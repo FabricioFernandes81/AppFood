@@ -13,7 +13,7 @@ const PainelCategoria = ({ children, category }) => {
             navigate(`../menu/category/${category.categoryId}?type=${category.type}`);
     }
 
-    console.log("Category= ", category)
+   // console.log("Category= ", category)
 
 
     return (<>

@@ -13,7 +13,7 @@ namespace Infrastructure.Configurations.TablesConfigurations
     {
         public void Configure(EntityTypeBuilder<Opcoes> builder)
         {
-          builder.HasKey(x => x.Id);
+          builder.HasKey(x => x.OpcaoId);
             builder.HasIndex(x => x.OpcaoId).IsUnique();
 
             builder
@@ -26,6 +26,10 @@ namespace Infrastructure.Configurations.TablesConfigurations
                 .WithMany(b => b.Opcoes!)
                 .HasForeignKey(p => p.OpcoesGrupoId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(b => b.Produto)
+                .WithMany(v => v.Opcoes)
+                .HasForeignKey(p => p.ProdutoId);
         }
     }
 }

@@ -91,6 +91,27 @@ class CardapioService {
             throw new error;
         }
   }
+  async PutStatus(merchantId, payloadData){
+  
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json' 
+        // ...authHeader(),
+      },
+      body: JSON.stringify(payloadData)
+    };
+  
+    try {
+                                  /// https://localhost:7060/api/Item?mercnhaId=11111111111
+       const response = await fetch(`${CATALOGS_SERVER_URL}/api/Item?mercnhaId=${merchantId}`, requestOptions);
+            return handleResponse(response);
+    } catch (error) {
+      throw new error;
+      
+    }
+
+  }
 }
 
 const cardapioService = new CardapioService();

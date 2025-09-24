@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.DTOS.items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace Application.DTOS.Options
         public string ProductId { get; set; }
         public string Name { get; set; }
         public string Status { get; set; }
+        public List<StatusByCatalog> StatusByCatalogs { get; set; }
         public List<OptionContextModifierDto> contextModifiers { get; set; }
         public List<int>? Fraction { get; set; }
     }

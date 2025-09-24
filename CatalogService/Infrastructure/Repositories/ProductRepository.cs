@@ -22,22 +22,23 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<Produto>> GetPageAsync(int page, int pageSize, Guid merchantId)
         {
-            var skip = (page - 1) * pageSize;
-            var products = await _contextCatalogs.Produtos
-                .Include(p => p.Items)
-                .ThenInclude(ca=>ca.Categoria)
-                .Include(p => p.ProdutoOpcoesGrupo)
-                .ThenInclude(g => g.GrupoOpcoes)
-                    .ThenInclude(g => g.Opcoes)
-                    .ThenInclude(p=>p.Produto)
-                 .Where(p => p.ComercioUId == merchantId && p.Items.Tipo == Domain.Enuns.ResourceItemTipo.DEFAULT)
+            /*  var skip = (page - 1) * pageSize;
+              var products = await _contextCatalogs.Produtos
+                  .Include(p => p.Items)
+                  .ThenInclude(ca=>ca.Categoria)
+                  .Include(p => p.ProdutoOpcoesGrupo)
+                  .ThenInclude(g => g.GrupoOpcoes)
+                      .ThenInclude(g => g.Opcoes)
+                      .ThenInclude(p=>p.Produto)
+                   .Where(p => p.ComercioUId == merchantId && p.Items.Tipo == Domain.Enuns.ResourceItemTipo.DEFAULT)
 
-                .Skip(skip)
-                .Take(pageSize)
-                .AsNoTracking()
-                .ToListAsync();
+                  .Skip(skip)
+                  .Take(pageSize)
+                  .AsNoTracking()
+                  .ToListAsync();
 
-            return products;
+              return products;*/
+            return null;
 
         }
     }

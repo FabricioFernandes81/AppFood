@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.DTOS.items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ namespace Application.DTOS.Options
     {
         public string Status { get; set; }
         public string parentOptionId { get; set; }
+
+        public List<StatusByCatalog> StatusByCatalog { get; set; }
     }
 }

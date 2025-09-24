@@ -9,8 +9,8 @@ namespace Domain.Juncoes
 {
     public class ProdutoOpcoesGrupo
     {
-        public int ProdutoId { get; set; }
-        public int GrupoId { get; set; }
+        public Guid ProdutoId { get; set; }
+        public Guid GrupoId { get; set; }
 
         public Produto Produto { get; set; }
         public GrupoOpcoes GrupoOpcoes { get; set; }

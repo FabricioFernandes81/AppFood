@@ -1,4 +1,5 @@
 ﻿
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace Infrastructure.Repositories.IRepositories
 {
     public interface ICatalogRepository
     {
-     //   Task<List<Catalogo>> GetCatalogsByMerchantIdAsync(Guid merchantId);
+        Task<List<Catalogo>> GetAll(Guid catalogId, Guid merchantId);
+        Task<List<Catalogo>> GetCatalogsByMerchantIdAsync(Guid merchantId);
      //   Task<Catalogo> GetCatalogByIdAsync(Guid catalogId, Guid merchantId);
     }
 }

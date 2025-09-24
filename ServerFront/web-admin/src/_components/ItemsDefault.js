@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import OptionsGroup from './OptionsGroup'; // Certifique-se de que o caminho está correto
 
-const ItemsDefault = ({ item }) => {
+const ItemsDefault = ({ item,handleStatus }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleToggleCollapse = () => {
         setIsOpen(!isOpen);
     };
-
+    
     return (
         <React.Fragment>
           <div className='dflexItems'>
@@ -76,8 +76,12 @@ const ItemsDefault = ({ item }) => {
                 </div>
                 <div>
                   <div className='bt'>
-                    <button className="btn btn-outline-danger" >
+                    <button className="btn btn-outline-danger" onClick={()=>handleStatus(item)}>
+                      {item.status === "AVAILABLE" ? (
                       <i class="fa-solid fa-play"></i>
+                      ) : (<i class="fa-solid fa-pause"></i>
+                      )}
+
                     </button>
 
                   </div>

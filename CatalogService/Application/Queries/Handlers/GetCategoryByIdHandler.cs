@@ -28,7 +28,7 @@ namespace Application.Queries.Handlers
             string merchantId = query.MerchantId?.Trim();
             if (Guid.TryParse(categoryId, out Guid categoryGuid) && Guid.TryParse(merchantId, out Guid merchantGuid))
             {
-              
+                
                 return null;
             }
             else

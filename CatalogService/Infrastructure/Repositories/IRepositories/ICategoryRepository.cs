@@ -11,9 +11,11 @@ namespace Infrastructure.Repositories.IRepositories
     public interface ICategoryRepository
     {
         Task<List<Categoria>> GetCategoriesAsync(Guid merchantId);
+        Task<List<Categoria>> GetCategoriesAsync(Guid merchantId, Guid catalogId, bool includeItems);
 
-    //    Task<Categoria> GetCategoryByIdAsync(Guid categoryId, Guid merchantId);
+        Task<Categoria> GetCategoryByIdAsync(Guid categoryId, Guid merchantId);
 
+        Task<Categoria> UpdateCategoryAsync(Categoria categoria);
    //     Task<Categoria> CreateCategoryAsync(Categoria category);
    //     Task<CatalogoCategoria> CreateCatalogCategoryAsync(CatalogoCategoria catalogoCategoria);
     }

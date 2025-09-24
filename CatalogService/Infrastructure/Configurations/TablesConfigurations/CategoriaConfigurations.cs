@@ -13,9 +13,13 @@ namespace Infrastructure.Configurations.TablesConfigurations
     {
         public void Configure(EntityTypeBuilder<Categoria> builder)
         {
-            builder.HasKey(builder => builder.Id);
+            builder.HasKey(builder => builder.CategoriaId);
             builder.HasIndex(builder => builder.CategoriaId).IsUnique();
 
+            builder.HasOne(c => c.Catalogo)
+                .WithMany(c => c.Categorias)
+                .HasForeignKey(c => c.CatalogoId);
+                
             
         }
     }

@@ -9,14 +9,11 @@ namespace Domain.Entities
 {
     public class Contexto
     {
-        public int Id { get; set; }
-        public Guid ContextoId { get; set; }
-        public int OpcaoId { get; set; }
-        public int parentOptionId { get; set; }
+        public Guid Id { get; set; }
+       
+        public Guid CatalogoId { get; set; }
 
-        public Opcoes Opcao { get; set; }
-
-        public ResourceStatus Status { get; set; }
-        //Preço 
+        public Catalogo Catalogo { get; set; }
+        public ResourceTipoCatalogo ContextoType { get; set; }
     }
 }

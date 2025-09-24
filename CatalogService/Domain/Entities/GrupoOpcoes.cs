@@ -10,7 +10,7 @@ namespace Domain.Entities
 {
     public class GrupoOpcoes
     {
-        public int Id { get; set; }
+    
         public Guid OpcaoGrupoId { get; set; }
         public string? Nome { get; set; }
         public int Min { get; set; }
